@@ -3,7 +3,7 @@ package at.fhj.itm.herzelek15;
 public class EntryPoint {
 
 	public static void main(String[] args) {
-		ICommandLineDistance dist = new CommandLineDistance();
+		CommandLineDistance dist = new CommandLineDistance();
 		
 		if(args.length != dist.getMinArguments()){
 			System.out.println(dist.getUsage());
