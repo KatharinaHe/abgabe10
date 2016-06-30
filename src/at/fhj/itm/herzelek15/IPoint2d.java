@@ -2,7 +2,7 @@ package at.fhj.itm.herzelek15;
 
 /**
  * Interface for an simple integer calcuator which supports the four basic operations
- * @author Katharina Herzele
+ * @author Gerhard Seuchter
  *
  */
 public interface IPoint2d {

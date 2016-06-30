@@ -1,4 +1,5 @@
 package at.fhj.itm.herzelek15;
+import java.awt.Point;
 class Point2d {
 	
 	/**
@@ -9,8 +10,8 @@ class Point2d {
 	/**
 	*Variablen fuer Koordinaten
 	*/
-	private double x = 0;
-	private double y = 0;
+	private double x;
+	private double y;
 
 	
 	/**
@@ -30,8 +31,8 @@ class Point2d {
 	public Point2d () 
 	{	
 		//Koordinaten 0 setzen
-		this.x = 0;
-		this.y = 0;
+		x = 0;
+		y = 0;
 	}
 
 	/**
@@ -40,8 +41,8 @@ class Point2d {
 	 */
 	public Point2d (Point2d pt) 
 	{	
-		this.x = pt.x;
-		this.y = pt.y;
+		x = pt.x;
+		y = pt.y;
 	}
 
 	/**
@@ -58,7 +59,7 @@ class Point2d {
 	 * @param b
 	 */
 	public void setDebug (boolean b) {
-		this.debug = b;
+		debug = b;
 	}
 
 	/**

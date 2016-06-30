@@ -1,7 +1,7 @@
 package at.fhj.itm.herzelek15;
 /**
  * Calculator that can interpret results directly from the command line
- * @author gseuchter
+ * @author Katharina Herzele
  *
  */
 public class CommandLineDistance extends Point2d implements ICommandLineDistance {

@@ -76,19 +76,18 @@
 	<target name="test" depends="compile" description="testing the java source code" >
 		
 		
-			<junit printsummary="yes" haltonfailure="yes">
-						<classpath>
-							<pathelement location="${target.java}"/>
-							<pathelement location="${target.junit}"/>
-							<path refid="externalLibs"/>
-						</classpath>
-							
-						<batchtest todir="${target.testreports}">
-							<fileset refid="junitTestCode"/>
-						</batchtest>
-						<formatter type="plain"/>
-						</junit>
-			
+		<junit printsummary="yes" haltonfailure="yes">
+					<classpath>
+						<pathelement location="${target.java}"/>
+						<pathelement location="${target.junit}"/>
+						<path refid="externalLibs"/>
+					</classpath>
+					
+					<batchtest todir="${target.testreports}">
+						<fileset refid="junitTestCode"/>
+					</batchtest>
+					<formatter type="plain"/>
+				</junit>
 		<!-- 
 			TODO: please use "junitTestCode" fileset for integrating test cases, which should fail 
 		-->
