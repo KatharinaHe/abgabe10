@@ -1,0 +1,119 @@
+<?xml version="1.0"?> 
+<project name="uebung0 demo project" default="jar">
+	<!-- 
+	
+		THERE ARE SEVERAL TODO's, which you should integrate
+	
+	-->
+	
+    <!-- alternative include a properties file to keep the build file clean and structured  -->
+	 <property file="build.properties" />
+	
+
+	<!-- define external libs, like junit -->
+	<path id="externalLibs">
+		<pathelement location="${libs}/junit-4.10.jar" />
+		<!--<pathelement location="${libs}/xxx.jar" />-->
+	</path>
+
+	<!-- define fileset for source code -->
+	<fileset id="javaCode" dir="${src.java}">
+		<include name="**/*.java"/>
+		<!-- 
+			TODO: include the needed source files by pattern, e.g. all *.java
+		-->
+		
+	</fileset>
+
+	<!-- define fileset for test code -->
+	<fileset id="junitTestCode" dir="${src.junit}">
+		<include name="**/*Test.java"/>
+		<!-- 
+			TODO: include the needed source files by pattern, e.g. all *Test.java
+		-->
+	</fileset>
+	
+	<!-- define fileset for FAIL test code -->
+	<fileset id="junitTestCodeFail" dir="${src.junit}">
+		<include name="**/*Fail.java"/>
+		<!-- 
+			TODO: include the needed source files by pattern, e.g. all Test Files which named *Fail.java
+		-->
+	</fileset>
+	
+	<!-- clean -->
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+	
+	<!-- prepare everything -->
+    <target name="prepare" description="prepare folder structure for compiling classes and generating documentation">
+		<mkdir dir="${target.java}" />
+		<mkdir dir="${target.junit}" />
+		<mkdir dir="${target.jar}" />
+    	<mkdir dir="${target.testreports}"/>
+    </target>
+
+	<target name="compile" depends="prepare" description="compiles java sources">
+		<!-- compile java sources -->
+		<javac srcdir="${src.java}" destdir="${target.java}" includeantruntime="false" />
+		<!-- compile junit test sources -->
+		<javac srcdir="${src.junit}" destdir="${target.junit}" includeantruntime="false">
+			<classpath>
+				<pathelement location="${target.java}"/>
+				<path refid="externalLibs" /> <!-- are needed because junit is not standard implemented to jdk -->
+			</classpath>
+		</javac>
+	</target>
+	
+	
+	
+	
+	
+	
+
+	<!-- run all tests and complete script will halt on failure -->
+	<target name="test" depends="compile" description="testing the java source code" >
+		
+		
+			<junit printsummary="yes" haltonfailure="yes">
+						<classpath>
+							<pathelement location="${target.java}"/>
+							<pathelement location="${target.junit}"/>
+							<path refid="externalLibs"/>
+						</classpath>
+							
+						<batchtest todir="${target.testreports}">
+							<fileset refid="junitTestCode"/>
+						</batchtest>
+						<formatter type="plain"/>
+						</junit>
+			
+		<!-- 
+			TODO: please use "junitTestCode" fileset for integrating test cases, which should fail 
+		-->
+	</target>
+	
+	
+	<!-- create jar file for later use -->
+    <target name="jar" depends="test" description="creates jar archive for deployement">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Point2d_herzelek15.jar" >
+            <manifest>
+                <attribute name="Main-Class" value="at.fhj.itm.herzelek15.EntryPoint"/>
+            </manifest>
+			<fileset dir="${target.java}">
+				<include name="**/*.class" />
+			</fileset>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <echo message="Attempting to run!" />
+        <java jar="build/jar/Point2d_herzelek15.jar" output="results.txt" fork="true" >
+        	<arg line="dist 3 4 5 6"/>
+    	</java>
+    </target>
+
+</project>
+
